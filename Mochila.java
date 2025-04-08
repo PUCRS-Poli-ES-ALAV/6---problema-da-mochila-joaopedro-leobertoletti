@@ -51,8 +51,11 @@ public class Mochila {
         long tempoTotal = fim - inicio;
 
         System.out.println("Valor máximo que pode ser colocado na mochila: " + melhorValor);
+        System.out.println("--------------------------");
         System.out.println("Número de interações: " + interacoes);
-        System.out.println("Número de instruções estimadas: " + instrucoes);
+        System.out.println("--------------------------");
+        System.out.println("Número de instruções: " + instrucoes);
+        System.out.println("--------------------------");
         System.out.println("Tempo de execução (nanosegundos): " + tempoTotal);
 
         return melhorValor;
