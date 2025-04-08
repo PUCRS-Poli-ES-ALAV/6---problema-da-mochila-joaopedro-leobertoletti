@@ -17,21 +17,43 @@ public class Mochila {
         int n = itens.size();
         int melhorValor = 0;
 
-        for (int i = 0; i < (1 << n); i++) {  
+        int interacoes = 0;
+        int instrucoes = 0;
+
+        long inicio = System.nanoTime(); // tempo inicial
+
+        for (int i = 0; i < (1 << n); i++) {
             int pesoAtual = 0;
             int valorAtual = 0;
 
+            instrucoes += 2; 
+            interacoes++; 
+
             for (int j = 0; j < n; j++) {
+                interacoes++; 
+
+                instrucoes++; 
                 if ((i & (1 << j)) > 0) {
                     pesoAtual += itens.get(j).peso;
                     valorAtual += itens.get(j).valor;
+                    instrucoes += 3; 
                 }
             }
 
+            instrucoes++; 
             if (pesoAtual <= capacidade && valorAtual > melhorValor) {
                 melhorValor = valorAtual;
+                instrucoes++; 
             }
         }
+
+        long fim = System.nanoTime(); 
+        long tempoTotal = fim - inicio;
+
+        System.out.println("Valor máximo que pode ser colocado na mochila: " + melhorValor);
+        System.out.println("Número de interações: " + interacoes);
+        System.out.println("Número de instruções estimadas: " + instrucoes);
+        System.out.println("Tempo de execução (nanosegundos): " + tempoTotal);
 
         return melhorValor;
     }
@@ -45,6 +67,6 @@ public class Mochila {
 
         int capacidade = 5;
 
-        System.out.println("Valor máximo que pode ser colocado na mochila: " + mochilaForcaBruta(itens, capacidade));
+        mochilaForcaBruta(itens, capacidade);
     }
 }
